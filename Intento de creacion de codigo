@@ -1,0 +1,35 @@
+// Define las conexiones de los pines y el array de dígitos
+int segmentPins[] = {3, 4, 5, 6, 7, 8, 9, 10}; // Asigna cada pin de segmento de 'a' a 'g' y el punto decimal
+int digits[10][8] = {
+  // a, b, c, d, e, f, g, dp
+  {1, 1, 1, 1, 1, 1, 0, 0}, // Representación del número '0'
+  {0, 1, 1, 0, 0, 0, 0, 0}, // Representación del número '1'
+  {1, 1, 0, 1, 1, 0, 1, 0}, // Representación del número '2'
+  {1, 1, 1, 1, 0, 0, 1, 0}, // Representación del número '3'
+  {0, 1, 1, 0, 0, 1, 1, 0}, // Representación del número '4'
+  {1, 0, 1, 1, 0, 1, 1, 0}, // Representación del número '5'
+  {1, 0, 1, 1, 1, 1, 1, 0}, // Representación del número '6'
+  {1, 1, 1, 0, 0, 0, 0, 0}, // Representación del número '7'
+  {1, 1, 1, 1, 1, 1, 1, 0}, // Representación del número '8'
+  {1, 1, 1, 1, 0, 1, 1, 0}  // Representación del número '9'
+};
+
+void setup() {
+  // Configura todos los pines como salidas
+  for (int i = 0; i < 8; i++) {
+    pinMode(segmentPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  for (int num = 9; num >= 1; num--) {
+    showNumber(num); // Llama a la función para mostrar el número
+    delay(1000);     // Espera un segundo antes del siguiente número
+  }
+}
+
+void showNumber(int num) {
+  for (int segment = 0; segment < 8; segment++) {
+    digitalWrite(segmentPins[segment], digits[num][segment]);
+  }
+}
